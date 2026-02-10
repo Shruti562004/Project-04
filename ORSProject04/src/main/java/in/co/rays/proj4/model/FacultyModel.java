@@ -62,7 +62,6 @@ public class FacultyModel {
 			throw new DuplicateRecordException("Email Id already exists");
 		}
 
-
 		try {
 			conn = JDBCDataSource.getConnection();
 			pk = nextPk();
@@ -96,7 +95,7 @@ public class FacultyModel {
 			pstmt.close();
 			conn.close();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 			try {
 				conn.rollback();
 			} catch (Exception ex) {

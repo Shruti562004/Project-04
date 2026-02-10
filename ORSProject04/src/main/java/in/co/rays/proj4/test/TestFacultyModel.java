@@ -43,7 +43,7 @@ public static void testAdd() throws DuplicateRecordException {
 		bean.setMobileNo("677654329");
 		bean.setCollegeId(1);
 		bean.setCollegeName("sage");
-		bean.setCourseId(4);
+		bean.setCourseId(1);
 		bean.setCourseName("java");
 		bean.setDob(sdf.parse("6/09/1999"));
 		bean.setSubjectId(1);

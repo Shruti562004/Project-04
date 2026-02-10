@@ -10,8 +10,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public final class JDBCDataSource {
 	
-	private static JDBCDataSource jds = null ;
-	private ComboPooledDataSource cpds = null ;
+	private static JDBCDataSource jds = null; 
+	private ComboPooledDataSource cpds = null;
 	
 	private static ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.proj4.bundle.system");
 	
@@ -43,7 +43,7 @@ public final class JDBCDataSource {
 	public static Connection getConnection() {
 		try {
 			return getInstance().cpds.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException e) {                                                                                    
 			return null;
 		}
 	}

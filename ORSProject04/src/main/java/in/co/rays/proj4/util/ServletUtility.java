@@ -54,7 +54,7 @@ public class ServletUtility {
 			return "";
 		} else {
 			return val;
-		}
+		} 
 	}
 
 	public static void setSuccessMessage(String msg, HttpServletRequest request) {

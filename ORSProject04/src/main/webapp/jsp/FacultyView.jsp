@@ -83,8 +83,9 @@
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("email", request)%></font></td>
 				</tr>
 				<tr>
-					<th align="left">Date of Birth<span style="color: red">*</span></th>
-					<td><input type="text" id="udate" name="dob"
+					<th align="left">Date of Birth<span style="width: 98%"
+						style="color: red">*</span></th>
+					<td><input type="Date" id="udate" name="dob"
 						placeholder="Select Date of Birth"
 						value="<%=DataUtility.getDateString(bean.getDob())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
@@ -115,7 +116,7 @@
 					<td><%=HTMLUtility.getList("collegeId", String.valueOf(bean.getCollegeId()), collegeList)%></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("collegeId", request)%></font></td>
 				</tr>
-				<%-- <tr>
+				<tr>
 					<th align="left">Course<span style="color: red">*</span></th>
 					<td><%=HTMLUtility.getList("courseId", String.valueOf(bean.getCourseId()), courseList)%></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("courseId", request)%></font></td>
@@ -124,7 +125,7 @@
 					<th align="left">Subject<span style="color: red">*</span></th>
 					<td><%=HTMLUtility.getList("subjectId", String.valueOf(bean.getSubjectId()), subjectList)%></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("subjectId", request)%></font></td>
-				</tr> --%>
+				</tr> 
 				<tr>
 					<th></th>
 					<td></td>

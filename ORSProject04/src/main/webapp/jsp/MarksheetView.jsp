@@ -58,13 +58,13 @@
                         <font color="red"><%=ServletUtility.getErrorMessage("rollNo", request)%></font>
                     </td>
                 </tr>
-                <%-- <tr>
+                <tr>
                     <th align="left">Name<span style="color: red">*</span></th>
-                    <td><%=HTMLUtility.getList("studentId", String.valueOf(bean.getStudentId()), studentList)%></td>
+                    <td><%=HTMLUtility.getList("studentId", String.valueOf(bean.getId()), studentList)%></td>
                     <td style="position: fixed;">
                         <font color="red"><%=ServletUtility.getErrorMessage("studentId", request)%></font>
                     </td>
-                </tr> --%>
+                </tr>
                 <tr>
                     <th align="left">Physics<span style="color: red">*</span></th>
                     <td>
