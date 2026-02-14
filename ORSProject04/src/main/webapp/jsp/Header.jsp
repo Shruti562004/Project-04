@@ -44,7 +44,10 @@
 	<a href="<%=ORSView.FACULTY_CTL %>">Add Faculty</a>
 		<b>|</b>
 	<a href="<%=ORSView.FACULTY_LIST_CTL%>"> Faculty List</a> 
-			
+				<b>|</b>
+	<a href="<%=ORSView.INQUIRY_CTL %>">Add Inquery</a>
+		<b>|</b>
+	<a href="<%=ORSView.FACULTY_LIST_CTL%>"> Faculty List</a> 
 	<hr>
 </body>
 </html>

@@ -131,7 +131,7 @@ public class FacultyModel {
 			} catch (Exception ex) {
 				throw new ApplicationException("Exception : delete rollback exception  " + ex.getMessage());
 			}
-			throw new ApplicationException("Exception : Exception in delete Student");
+			throw new ApplicationException("Exception : Exception i     n delete Student");
 		} finally {
 			JDBCDataSource.closeConnection(conn);
 		}

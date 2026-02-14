@@ -21,6 +21,7 @@
                 %>Update<%
                     } else {
                 %>Add<%
+                
                     }
                 %>
                 College
@@ -38,7 +39,6 @@
                     </font>
                 </h3>
             </div>
-
             <input type="hidden" name="id" value="<%=bean.getId()%>">
             <input type="hidden" name="createdBy" value="<%=bean.getCreatedBy()%>">
             <input type="hidden" name="modifiedBy" value="<%=bean.getModifiedBy()%>">
@@ -61,11 +61,10 @@
                     <td><input type="text" name="address" placeholder="Enter Address" value="<%=DataUtility.getStringData(bean.getAddress())%>"></td>
                     <td style="position: fixed;">
                         <font color="red">
-                            <%=ServletUtility.getErrorMessage("address", request)%>
-                        </font>
+                            <%=ServletUtility.getErrorMessage("address", request)%> -                        </font>
                     </td>
                 </tr>
-
+ 
                 <tr>
                     <th align="left">State<span style="color: red">*</span></th>
                     <td><input type="text" name="state" placeholder="Enter State" value="<%=DataUtility.getStringData(bean.getState())%>"></td>

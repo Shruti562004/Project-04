@@ -126,87 +126,77 @@ public class MarksheetCtl  extends BaseCtl{
 
   @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	  long id = DataUtility.getLong(request.getParameter("id"));
+
+		MarksheetModel model = new MarksheetModel();
+
+		if (id > 0) {
+			try {
+				MarksheetBean bean = model.findByPK(id);
+				ServletUtility.setBean(bean, request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, request, response);
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), request, response);
+
 }
   
   
  @Override
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
+	 String op = DataUtility.getString(request.getParameter("operation"));
 
-			List list = null;
-			List next = null;
+		MarksheetModel model = new MarksheetModel();
 
-			int pageNo = DataUtility.getInt(request.getParameter("pageNo"));
-			int pageSize = DataUtility.getInt(request.getParameter("pageSize"));
+		long id = DataUtility.getLong(request.getParameter("id"));
 
-			pageNo = (pageNo == 0) ? 1 : pageNo;
-			pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
-
+		if (OP_SAVE.equalsIgnoreCase(op)) {
 			MarksheetBean bean = (MarksheetBean) populateBean(request);
-			MarksheetModel model = new MarksheetModel();
-
-			String op = DataUtility.getString(request.getParameter("operation"));
-			String[] ids = request.getParameterValues("ids");
-
 			try {
-
-				if (OP_SEARCH.equalsIgnoreCase(op) || "Next".equalsIgnoreCase(op) || "Previous".equalsIgnoreCase(op)) {
-
-					if (OP_SEARCH.equalsIgnoreCase(op)) {
-						pageNo = 1;
-					} else if (OP_NEXT.equalsIgnoreCase(op)) {
-						pageNo++;
-					} else if (OP_PREVIOUS.equalsIgnoreCase(op) && pageNo > 1) {
-						pageNo--;
-					}
-
-				} else if (OP_NEW.equalsIgnoreCase(op)) {
-					ServletUtility.redirect(ORSView.MARKSHEET_CTL, request, response);
-					return;
-
-				} else if (OP_DELETE.equalsIgnoreCase(op)) {
-					pageNo = 1;
-					if (ids != null && ids.length > 0) {
-						MarksheetBean deletebean = new MarksheetBean();
-						for (String id : ids) {
-							deletebean.setId(DataUtility.getInt(id));
-							model.delete(deletebean);
-							ServletUtility.setSuccessMessage("Marksheet is deleted successfully", request);
-						}
-					} else {
-						ServletUtility.setErrorMessage("Select at least one record", request);
-					}
-
-				} else if (OP_RESET.equalsIgnoreCase(op)) {
-					ServletUtility.redirect(ORSView.MARKSHEET_LIST_CTL, request, response);
-					return;
-
-				} else if (OP_BACK.equalsIgnoreCase(op)) {
-					ServletUtility.redirect(ORSView.MARKSHEET_LIST_CTL, request, response);
-					return;
-				}
-
-				list = model.search(bean, pageNo, pageSize);
-				next = model.search(bean, pageNo + 1, pageSize);
-
-				if (list == null || list.size() == 0) {
-					ServletUtility.setErrorMessage("No record found ", request);
-				}
-
-				ServletUtility.setList(list, request);
-				ServletUtility.setPageNo(pageNo, request);
-				ServletUtility.setPageSize(pageSize, request);
+				long pk = model.add(bean);
 				ServletUtility.setBean(bean, request);
-				request.setAttribute("nextListSize", next.size());
-
-				ServletUtility.forward(getView(), request, response);
+				ServletUtility.setSuccessMessage("Marksheet added successfully", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Roll No already exists", request);
 			} catch (ApplicationException e) {
 				e.printStackTrace();
 				ServletUtility.handleException(e, request, response);
 				return;
 			}
+		} else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			MarksheetBean bean = (MarksheetBean) populateBean(request);
+			try {
+				if (id > 0) {
+					model.update(bean);
+				}
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setSuccessMessage("Marksheet updated successfully", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Roll No already exists", request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, request, response);
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.MARKSHEET_LIST_CTL, request, response);
+			return;
+		} else if (OP_RESET.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.MARKSHEET_CTL, request, response);
+			return;
+		}
+		ServletUtility.forward(getView(), request, response);
 	}
+
+
+			
+	
 	@Override
 	protected String getView() {
 		

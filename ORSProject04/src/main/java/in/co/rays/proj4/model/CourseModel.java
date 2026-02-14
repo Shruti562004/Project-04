@@ -134,8 +134,9 @@ public class CourseModel {
 
 
 			pstmt.setString(1, bean.getName());
-			pstmt.setString(2, bean.getDescription());
-			pstmt.setString(3, bean.getDuration());
+			
+			pstmt.setString(2, bean.getDuration());
+			pstmt.setString(3, bean.getDescription());
 			pstmt.setString(4, bean.getCreatedBy());
 			pstmt.setString(5, bean.getModifiedBy());
 			pstmt.setTimestamp(6, bean.getCreatedDatetime());
@@ -323,8 +324,9 @@ public class CourseModel {
 				bean = new CourseBean();
 				bean.setId(rs.getLong(1));
 				bean.setName(rs.getString(2));
-				bean.setDescription(rs.getString(3));
-				bean.setDuration(rs.getString(4));
+				bean.setDuration(rs.getString(3));
+				bean.setDescription(rs.getString(4));
+			
 				bean.setCreatedBy(rs.getString(5));
 				bean.setModifiedBy(rs.getString(6));
 				bean.setCreatedDatetime(rs.getTimestamp(7));

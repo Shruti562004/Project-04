@@ -10,14 +10,14 @@ import in.co.rays.proj4.model.RoleModel;
 public class HTMLUtility {
 
 	public static String getList(String name, String selectedVal, HashMap<String, String> map) {
-
+ System.out.println(selectedVal);
 		StringBuffer sb = new StringBuffer(
 				"<select style=\"width: 169px;text-align-last: center;\" class='form-control' name='" + name + "'>");
 
 		sb.append("\n<option selected value=''>-------------Select-------------</option>");
 
 		Set<String> keys = map.keySet();
-		String val = null;
+		String val = null; 
 
 		for (String key : keys) {
 			val = map.get(key);
@@ -56,6 +56,7 @@ public class HTMLUtility {
 			}
 		}
 		sb.append("\n</select>");
+		
 		return sb.toString();
 	}
 
