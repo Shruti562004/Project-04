@@ -141,7 +141,7 @@ public class CollegeModel {
 			// Check if updated College already exist
 			if (duplicateCollegeName != null && duplicateCollegeName.getId() != bean.getId()) {
 
-				throw new DuplicateRecordException("Course is already exist");
+				throw new DuplicateRecordException("college is already exist");
 			}
 
 

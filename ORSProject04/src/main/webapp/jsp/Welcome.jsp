@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<h1>Welcome.................</h1>
+<%@ include file="Header.jsp" %>
+<h1 style="text-align:center">Welcome.................</h1>
 
 </body>
 </html>

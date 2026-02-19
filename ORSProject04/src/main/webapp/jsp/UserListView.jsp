@@ -6,7 +6,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="in.co.rays.proj4.util.DataUtility"%>
 <%@page import="in.co.rays.proj4.bean.BaseBean"%>
-<%@page import="in.co.rays.proj4.bean.UserBean"%>
 <%@page import="in.co.rays.proj4.controller.UserListCtl"%>
 <%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <%@page import="java.util.List"%>
@@ -19,9 +18,6 @@
 </head>
 <body>
     <%@include file="Header.jsp"%>
-    <%
-UserBean user = (UserBean) session.getAttribute("user");
-%>
 
     <jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean" scope="request"></jsp:useBean>
 
@@ -96,8 +92,8 @@ UserBean user = (UserBean) session.getAttribute("user");
 
                 <tr>
                     <td style="text-align: center;">
-                        <input type="checkbox" class="case" name="ids" value="<%=bean.getId()%>">
-                    
+                        <input type="checkbox" class="case" name="ids" value="<%=bean.getId()%>"
+                            <%= (user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN) ? "disabled" : "" %>>
                     </td>
                     <td style="text-align: center;"><%=index++%></td>
                     <td style="text-align: center; text-transform: capitalize;"><%=bean.getFirstName()%></td>
@@ -108,7 +104,8 @@ UserBean user = (UserBean) session.getAttribute("user");
                     <td style="text-align: center;"><%=date%></td>
                     <td style="text-align: center; text-transform: capitalize;"><%=roleBean.getName()%></td>
                     <td style="text-align: center;">
-                        <a href="UserCtl?id=<%=bean.getId()%>">Edit</a>
+                        <a href="UserCtl?id=<%=bean.getId()%>" 
+                           <%= (user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN) ? "onclick='return false;'" : "" %>>Edit</a>
                     </td>
                 </tr>
 

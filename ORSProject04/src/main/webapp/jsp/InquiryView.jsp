@@ -17,7 +17,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+ <%@ include file="Header.jsp"%>
  <div align="center">
+ 
+ 
  <%
 InquiryBean bean = (InquiryBean) request.getAttribute("bean");
 if (bean == null) {

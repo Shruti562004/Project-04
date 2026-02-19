@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.InquiryBean;
 import in.co.rays.proj4.bean.RoleBean;
+import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.model.InquiryModel;
+import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.PropertyReader;
@@ -88,7 +90,20 @@ public class InquiryCtl extends BaseCtl {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
+		long id = DataUtility.getLong(request.getParameter("id"));
+
+		InquiryModel model = new InquiryModel();
+
+		if (id > 0) {
+			try {
+				InquiryBean bean = model.findByPk(id);
+				ServletUtility.setBean(bean, request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, request, response);
+				return;
+			}
+		}
 		ServletUtility.forward(getView(), request, response);
 
 	}
@@ -117,10 +132,30 @@ public class InquiryCtl extends BaseCtl {
 			}
 		}
 
-		else if (OP_RESET.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.INQUIRY_CTL, request, response);
+		else if (OP_UPDATE.equalsIgnoreCase(op)) {
+			InquiryBean bean = (InquiryBean) populateBean(request);
+			try {
+				if (id > 0) {
+					inquiryModel.update(bean);
+				}
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setSuccessMessage("User updated successfully", request);
+			} catch (DuplicateRecordException e) {
+				ServletUtility.setBean(bean, request);
+				ServletUtility.setErrorMessage("Login Id already exists", request);
+			} catch (ApplicationException e) {
+				e.printStackTrace();
+				ServletUtility.handleException(e, request, response);
+				return;
+			}
+		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
+			ServletUtility.redirect(ORSView.INQUIRY_LIST_CTL, request, response);
 			return;
-		}
+			}
+		 else if (OP_RESET.equalsIgnoreCase(op)) {
+				ServletUtility.redirect(ORSView.INQUIRY_CTL, request, response);
+				return;
+			}
 		ServletUtility.forward(getView(), request, response);
 	}
 

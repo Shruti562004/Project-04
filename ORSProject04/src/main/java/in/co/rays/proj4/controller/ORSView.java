@@ -88,7 +88,30 @@ public interface ORSView {
 	public String ERROR_CTL = APP_CONTEXT + "/ErrorCtl";
 	
 	
+	//module**********************
 	
 	public String INQUIRY_VIEW = PAGE_FOLDER + "/InquiryView.jsp";
 	public String INQUIRY_CTL = APP_CONTEXT + "/InquiryCtl";
+
+
+
+public String INQUIRY_LIST_VIEW = PAGE_FOLDER + "/InquiryListView.jsp";
+public String INQUIRY_LIST_CTL= APP_CONTEXT + "/InquiryListCtl";
+
+
+
+public String INVENTORY_VIEW = PAGE_FOLDER + "/InventoryView.jsp";
+public String INVENTORY_CTL = APP_CONTEXT + "/InventoryCtl";
+
+public String FOLLOWUP_VIEW = PAGE_FOLDER + "/FollowupView.jsp";
+public String FOLLOWUP_CTL = APP_CONTEXT + "/FollowupCtl";
+
+
+public String EVENT_VIEW = PAGE_FOLDER + "/EventView.jsp";
+public  String EVENT_CTL = APP_CONTEXT + "/EventCtl";
+
+public  String EVENT_LIST_VIEW = PAGE_FOLDER + "/EventListView.jsp";
+public  String EVENT_LIST_CTL = APP_CONTEXT + "/EventListCtl";
+
+
 }

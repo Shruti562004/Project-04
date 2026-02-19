@@ -42,14 +42,5 @@ public abstract class BaseBean implements DropdownListBean  {
 		this.modifiedDatetime = modifiedDatetime;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

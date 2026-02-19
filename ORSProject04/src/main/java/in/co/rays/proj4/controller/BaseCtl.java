@@ -38,7 +38,7 @@ public abstract class BaseCtl extends HttpServlet {
 		return true;
 	}
 
-	protected void preload(HttpServletRequest request)  throws Exception {
+	protected void preload(HttpServletRequest request) throws Exception {
 	}
 
 	protected BaseBean populateBean(HttpServletRequest request) {
@@ -78,7 +78,6 @@ public abstract class BaseCtl extends HttpServlet {
 		return dto;
 	}
 
-
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -86,7 +85,7 @@ public abstract class BaseCtl extends HttpServlet {
 		try {
 			preload(request);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 

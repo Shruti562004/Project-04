@@ -37,7 +37,6 @@ public class FacultyModel {
 		}
 		return pk + 1;
 	}
-
 //add
 
 	public long add(FacultyBean bean) throws ApplicationException, DuplicateRecordException {
