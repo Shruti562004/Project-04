@@ -23,6 +23,8 @@ if (bean == null) {
 }
 %>
 
+<%@include file="Header.jsp" %>
+
 <div align="center">
     <h3 style="color:red">
         <%=ServletUtility.getErrorMessage(request)%>

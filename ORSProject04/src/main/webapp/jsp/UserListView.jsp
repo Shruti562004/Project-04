@@ -104,8 +104,7 @@
                     <td style="text-align: center;"><%=date%></td>
                     <td style="text-align: center; text-transform: capitalize;"><%=roleBean.getName()%></td>
                     <td style="text-align: center;">
-                        <a href="UserCtl?id=<%=bean.getId()%>" 
-                           <%= (user.getId() == bean.getId() || bean.getRoleId() == RoleBean.ADMIN) ? "onclick='return false;'" : "" %>>Edit</a>
+                              <a href="UserCtl?id=<%=bean.getId()%>">Edit</a>
                     </td>
                 </tr>
 

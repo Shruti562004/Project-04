@@ -80,7 +80,7 @@
 	<hr>
 	<a href="InquiryCtl"><b>Add Inquiry</b></a>
 	<b>|</b>
-	<a href="InquiryListCtl"><b>Add Inquiry</b></a>
+	<a href="InquiryListCtl"><b> Inquiry List</b></a>
 	<b>|</b>
 	<a href="FollowupCtl"><b>Add Followup</b></a>
 	<b>|</b>
@@ -89,6 +89,14 @@
 	<a href="<%=ORSView.EVENT_CTL%>"><b>Add Event</b></a>
 	<b>|</b>
 	<a href="<%=ORSView.EVENT_LIST_CTL%>"><b>Event List </b></a>
+	<b>|</b>
+	<a href="<%=ORSView.PAYMENT_CTL%>"><b>Add Payment</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.PAYMENT_LIST_CTL%>"><b> Payment List </b></a>
+	<b>|</b>
+	<a href="<%=ORSView.ANNOUNCE_CTL%>"><b>Add Announcement</b></a>
+	<b>|</b>
+	<a href="<%=ORSView.ANNOUNCE_LIST_CTL%>"><b> Announcement List </b></a>
 	<%
 	} else {
 	%>

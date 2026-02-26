@@ -114,4 +114,17 @@ public  String EVENT_LIST_VIEW = PAGE_FOLDER + "/EventListView.jsp";
 public  String EVENT_LIST_CTL = APP_CONTEXT + "/EventListCtl";
 
 
+public  String PAYMENT_VIEW= PAGE_FOLDER + "/PaymentView.jsp";
+public  String PAYMENT_CTL = APP_CONTEXT + "/PaymentCtl";
+
+public  String PAYMENT_LIST_VIEW= PAGE_FOLDER + "/PaymentListView.jsp";
+public  String PAYMENT_LIST_CTL = APP_CONTEXT + "/PaymentListCtl";
+
+public  String ANNOUNCE_VIEW= PAGE_FOLDER + "/AnnounceView.jsp";
+public  String ANNOUNCE_CTL = APP_CONTEXT + "/AnnounceCtl";
+
+public  String ANNOUNCE_LIST_VIEW= PAGE_FOLDER + "/AnnounceListView.jsp";
+public  String ANNOUNCE_LIST_CTL = APP_CONTEXT + "/AnnounceListCtl";
+
+
 }

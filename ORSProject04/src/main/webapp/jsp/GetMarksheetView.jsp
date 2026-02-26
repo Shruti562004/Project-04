@@ -172,7 +172,7 @@
                     <th align="center" style="width: 25%">Total Marks</th>
                     <th align="center" style="width: 25%">Percentage (%)</th>
                     <th align="center" style="width: 25%">Division</th>
-                    <th align="center" style="width: 25%">Result</th>
+                    <th align="center" style="width: 25%   ">Result</th>
                 </tr>
 
                 <tr>
