@@ -9,53 +9,58 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import in.co.rays.proj4.bean.BaseBean;
-import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.bean.EmiBean;
+
 import in.co.rays.proj4.exception.ApplicationException;
-import in.co.rays.proj4.model.RoleModel;
-import in.co.rays.proj4.model.UserModel;
+import in.co.rays.proj4.model.CollegeModel;
+import in.co.rays.proj4.model.EmiModel;
+import in.co.rays.proj4.model.MarksheetModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet("/UserListCtl")
-public class UserListCtl extends BaseCtl {
-
+@WebServlet("/EmiListCtl")
+public class EmiListCtl extends BaseCtl {
 	@Override
 	protected void preload(HttpServletRequest request) {
-		RoleModel roleModel = new RoleModel();
+		EmiModel model=new EmiModel();
+
 		try {
-			List roleList = roleModel.list();
-			request.setAttribute("roleList", roleList);
+			List list = model.list(0, 0);
+			request.setAttribute("statusList", list);
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	protected BaseBean populateBean(HttpServletRequest request) {
+	 protected BaseBean populateBean(HttpServletRequest request) {
 
-		UserBean bean = new UserBean();
+        EmiBean bean = new EmiBean();
 
-		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
-		bean.setLogin(DataUtility.getString(request.getParameter("login")));
-		bean.setRoleId(DataUtility.getLong(request.getParameter("roleId")));
+        bean.setId(DataUtility.getLong(request.getParameter("id")));
+        bean.setAmount(DataUtility.getLong(request.getParameter("amount")));
+        bean.setDueDate(DataUtility.getDate(request.getParameter("dueDate")));
+        bean.setStatus(DataUtility.getString(request.getParameter("status")));
 
-		return bean;
-	}
+       
 
-	@Override
+        return bean;
+    }
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		int pageNo = 1;
 		int pageSize = DataUtility.getInt(PropertyReader.getValue("page.size"));
 
-		UserBean bean = (UserBean) populateBean(request);
-		UserModel model = new UserModel();
+		EmiBean bean = (EmiBean) populateBean(request);
+		EmiModel model = new EmiModel();
 
 		try {
-			List<UserBean> list = model.search(bean, pageNo, pageSize);
-			List<UserBean> next = model.search(bean, pageNo + 1, pageSize);
+			List<EmiBean> list = model.search(bean, pageNo, pageSize);
+			List<EmiBean> next = model.search(bean, pageNo + 1, pageSize);
 
 			if (list == null || list.isEmpty()) {
 				ServletUtility.setErrorMessage("No record found", request);
@@ -79,6 +84,8 @@ public class UserListCtl extends BaseCtl {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+
 		List list = null;
 		List next = null;
 
@@ -88,8 +95,8 @@ public class UserListCtl extends BaseCtl {
 		pageNo = (pageNo == 0) ? 1 : pageNo;
 		pageSize = (pageSize == 0) ? DataUtility.getInt(PropertyReader.getValue("page.size")) : pageSize;
 
-		UserBean bean = (UserBean) populateBean(request);
-		UserModel model = new UserModel();
+		EmiBean bean = (EmiBean) populateBean(request);
+		EmiModel model = new EmiModel();
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		String[] ids = request.getParameterValues("ids");
@@ -107,29 +114,28 @@ public class UserListCtl extends BaseCtl {
 				}
 
 			} else if (OP_NEW.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.USER_CTL, request, response);
+				ServletUtility.redirect(ORSView.EMI_CTL, request, response);
 				return;
-				
-				
+
 			} else if (OP_DELETE.equalsIgnoreCase(op)) {
 				pageNo = 1;
 				if (ids != null && ids.length > 0) {
-					UserBean deletebean = new UserBean();
+					EmiBean deletebean = new EmiBean();
 					for (String id : ids) {
 						deletebean.setId(DataUtility.getInt(id));
 						model.delete(deletebean);
-						ServletUtility.setSuccessMessage("User deleted successfully", request);
+						ServletUtility.setSuccessMessage("deleted successfully", request);
 					}
 				} else {
 					ServletUtility.setErrorMessage("Select at least one record", request);
 				}
-				
+
 			} else if (OP_RESET.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.EMI_LIST_CTL, request, response);
 				return;
-				
+
 			} else if (OP_BACK.equalsIgnoreCase(op)) {
-				ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
+				ServletUtility.redirect(ORSView.EMI_LIST_CTL, request, response);
 				return;
 			}
 
@@ -147,17 +153,15 @@ public class UserListCtl extends BaseCtl {
 			request.setAttribute("nextListSize", next.size());
 
 			ServletUtility.forward(getView(), request, response);
-
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 			ServletUtility.handleException(e, request, response);
 			return;
 		}
 	}
-	
 
 	@Override
 	protected String getView() {
-		return ORSView.USER_LIST_VIEW;
+		return ORSView.EMI_LIST_VIEW;
 	}
 }

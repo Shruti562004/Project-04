@@ -19,8 +19,7 @@
 
 		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
 			scope="request"></jsp:useBean>
-
-		<%
+	<%
 			List<UserBean> roleList = (List<UserBean>) request.getAttribute("roleList");
 		%>
 

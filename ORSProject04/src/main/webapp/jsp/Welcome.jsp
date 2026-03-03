@@ -10,6 +10,6 @@
 
 <%@ include file="Header.jsp" %>
 <h1 style="text-align:center">Welcome.................</h1>
-
+<%@ include file="Footer.jsp" %>
 </body>
 </html>

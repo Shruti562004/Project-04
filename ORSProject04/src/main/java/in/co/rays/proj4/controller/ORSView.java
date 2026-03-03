@@ -126,5 +126,20 @@ public  String ANNOUNCE_CTL = APP_CONTEXT + "/AnnounceCtl";
 public  String ANNOUNCE_LIST_VIEW= PAGE_FOLDER + "/AnnounceListView.jsp";
 public  String ANNOUNCE_LIST_CTL = APP_CONTEXT + "/AnnounceListCtl";
 
+public  String ADVERTISE_VIEW= PAGE_FOLDER + "/AdvertiseView.jsp";
+public  String ADVERTISE_CTL = APP_CONTEXT + "/AdvertiseCtl";
 
+
+
+
+
+
+
+public String EMI_VIEW = PAGE_FOLDER + "/EmiView.jsp";
+public String EMI_CTL = APP_CONTEXT + "/EmiCtl";
+
+
+
+public String EMI_LIST_VIEW = PAGE_FOLDER + "/EmiListView.jsp";
+public String EMI_LIST_CTL= APP_CONTEXT + "/EmiListCtl";
 }

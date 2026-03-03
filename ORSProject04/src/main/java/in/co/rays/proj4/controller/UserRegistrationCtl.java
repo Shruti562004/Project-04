@@ -115,7 +115,6 @@ public class UserRegistrationCtl extends BaseCtl {
 		bean.setGender(DataUtility.getString(request.getParameter("gender")));
 		bean.setDob(DataUtility.getDate(request.getParameter("dob")));
 		bean.setMobileNo(DataUtility.getString(request.getParameter("mobileNo")));
-		bean.setRoleId(RoleBean.STUDENT);
 
 		populateDTO(bean, request);
 

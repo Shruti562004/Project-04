@@ -9,6 +9,7 @@ public class PropertyReader {
 	public static String getValue(String key) {
 
 		String val = null;
+		
 
 		try {
 			val = rb.getString(key); // {0} is required

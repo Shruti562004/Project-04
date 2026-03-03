@@ -63,7 +63,7 @@ public class ServletUtility {
 
 	public static String getSuccessMessage(HttpServletRequest request) {
 		String val = (String) request.getAttribute(BaseCtl.MSG_SUCCESS);
-		if (val == null) {
+     		if (val == null) {
 			return "";
 		} else {
 			return val;

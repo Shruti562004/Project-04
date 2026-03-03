@@ -7,20 +7,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.co.rays.proj4.bean.AdvertiseBean;
 import in.co.rays.proj4.bean.BaseBean;
-import in.co.rays.proj4.bean.CollegeBean;
-import in.co.rays.proj4.bean.UserBean;
+
 import in.co.rays.proj4.exception.ApplicationException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
-import in.co.rays.proj4.model.CollegeModel;
-import in.co.rays.proj4.model.UserModel;
+import in.co.rays.proj4.model.AdvertiseModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
 import in.co.rays.proj4.util.PropertyReader;
 import in.co.rays.proj4.util.ServletUtility;
 
-@WebServlet("/CollegeCtl")
-public class CollegeCtl extends BaseCtl {
+@WebServlet("/AdvertiseCtl")
+public class AdvertiseCtl extends BaseCtl {
 
 	protected boolean validate(HttpServletRequest request) {
 
@@ -34,62 +33,49 @@ public class CollegeCtl extends BaseCtl {
 			pass = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("address"))) {
-			request.setAttribute("address", PropertyReader.getValue("error.require", "Address"));
+		if (DataValidator.isNull(request.getParameter("budget"))) {
+			request.setAttribute("budget", PropertyReader.getValue("error.require", "budget"));
 			pass = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("state"))) {
-			request.setAttribute("state", PropertyReader.getValue("error.require", "State"));
+		if (DataValidator.isNull(request.getParameter("startDate"))) {
+			request.setAttribute("startDate", PropertyReader.getValue("error.require", "startDate"));
 			pass = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("city"))) {
-			request.setAttribute("city", PropertyReader.getValue("error.require", "City"));
-			pass = false;
-		}
-
-		if (DataValidator.isNull(request.getParameter("phoneNo"))) {
-			request.setAttribute("phoneNo", PropertyReader.getValue("error.require", "Phone No"));
-			pass = false;
-		} else if (!DataValidator.isPhoneLength(request.getParameter("phoneNo"))) {
-			request.setAttribute("phoneNo", "Phone No must have 10 digits");
-			pass = false;
-		} else if (!DataValidator.isPhoneNo(request.getParameter("phoneNo"))) {
-			request.setAttribute("phoneNo", "Invalid Phone No");
-			pass = false;
-		}
+		
 
 		return pass;
 	}
 	
-	@Override
+	
+	
 	protected BaseBean populateBean(HttpServletRequest request) {
 
-		CollegeBean bean = new CollegeBean();
+		AdvertiseBean bean = new AdvertiseBean();
 
-		bean.setId(DataUtility.getLong(request.getParameter("id")));
+		
 		bean.setName(DataUtility.getString(request.getParameter("name")));
-		bean.setAddress(DataUtility.getString(request.getParameter("address")));
-		bean.setState(DataUtility.getString(request.getParameter("state")));
-		bean.setCity(DataUtility.getString(request.getParameter("city")));
-		bean.setPhoneNo(DataUtility.getString(request.getParameter("phoneNo")));
+		bean.setBudget(DataUtility.getInt(request.getParameter("budget")));
+		bean.setStartDate(DataUtility.getDate(request.getParameter("startDate")));
+		
 
 		populateDTO(bean, request);
 
 		return bean;
 	}
 	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		long id = DataUtility.getLong(request.getParameter("id"));
 
-		CollegeModel model = new CollegeModel();
+		AdvertiseModel model = new AdvertiseModel();
 
 		if (id > 0) {
 			try {
-				CollegeBean bean = model.findByPk(id);
+				AdvertiseBean bean = model.findByPk(id);
 				ServletUtility.setBean(bean, request);
 			} catch (ApplicationException e) {
 				e.printStackTrace();
@@ -104,12 +90,12 @@ public class CollegeCtl extends BaseCtl {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = DataUtility.getString(request.getParameter("operation"));
 
-		CollegeModel model = new CollegeModel();
+		AdvertiseModel model = new AdvertiseModel();
 
 		long id = DataUtility.getLong(request.getParameter("id"));
 
 		if (OP_SAVE.equalsIgnoreCase(op)) {
-			CollegeBean bean = (CollegeBean) populateBean(request);
+			AdvertiseBean bean = (AdvertiseBean) populateBean(request);
 			try {
 				long pk = model.add(bean);
 				ServletUtility.setBean(bean, request);
@@ -124,7 +110,7 @@ public class CollegeCtl extends BaseCtl {
 			}
 		}
 		else if (OP_UPDATE.equalsIgnoreCase(op)) {
-			CollegeBean bean = (CollegeBean) populateBean(request);
+			AdvertiseBean bean = (AdvertiseBean) populateBean(request);
 			try {
 				if (id > 0) {
 					model.update(bean);
@@ -140,16 +126,13 @@ public class CollegeCtl extends BaseCtl {
 				return;
 			}
 		} else if (OP_CANCEL.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.COLLEGE_LIST_CTL, request, response);
+			ServletUtility.redirect(ORSView.USER_LIST_CTL, request, response);
 			return;
 		} else if (OP_RESET.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.COLLEGE_CTL, request, response);
+			ServletUtility.redirect(ORSView.ADVERTISE_CTL, request, response);
 			return;
 		}
-		else if (OP_RESET.equalsIgnoreCase(op)) {
-			ServletUtility.redirect(ORSView.COLLEGE_CTL, request, response);
-			return;
-		}
+		
 		ServletUtility.forward(getView(), request, response);
 	
 	}
@@ -157,7 +140,7 @@ public class CollegeCtl extends BaseCtl {
 	protected String getView() {
 	
 		
-				return ORSView.COLLEGE_VIEW;
+				return ORSView.ADVERTISE_VIEW;
 	}
 
 }

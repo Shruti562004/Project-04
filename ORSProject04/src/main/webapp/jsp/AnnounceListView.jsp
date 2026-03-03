@@ -22,9 +22,9 @@
              class="in.co.rays.proj4.bean.AnnounceBean"
              scope="request" />
 
-<div align="center">
+<div align="center"> 
 
-    <h1 style="color: navy;">Payment List</h1>
+    <h1 style="color: navy;">Announcement List</h1>
 
     <h3><font color="red">
         <%=ServletUtility.getErrorMessage(request)%>
